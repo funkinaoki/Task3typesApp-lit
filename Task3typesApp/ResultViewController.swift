@@ -13,6 +13,8 @@ class ResultViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var genre: UILabel!
     
+    @IBOutlet weak var search: UISearchBar!
+    
     var genrenum: Int!
     
     var addContext: String!
@@ -37,6 +39,7 @@ class ResultViewController: UIViewController, UITableViewDataSource {
         
         if genrenum == 1 {
             genre.text = "＜過去＞タスク一覧"
+            saveData.set(pastTaskArray, forKey: "udpastfTaskArray")
             pastTaskArray = saveData.array(forKey: "udpastTaskArray") as! [String]
             
         } else if genrenum == 2 {
@@ -72,9 +75,9 @@ class ResultViewController: UIViewController, UITableViewDataSource {
         print(UserDefaults.standard.dictionaryRepresentation())
 
     }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
-        
-
         if addContext != nil {
             let alert: UIAlertController = UIAlertController(title:"保存", message: "メモの保存が完了いたしました。", preferredStyle: .alert)
             alert.addAction(
@@ -88,9 +91,9 @@ class ResultViewController: UIViewController, UITableViewDataSource {
                         )
             )
             present(alert, animated: true, completion: nil)
-            
         }
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toTypeView" {
@@ -126,7 +129,8 @@ class ResultViewController: UIViewController, UITableViewDataSource {
             self.presentingViewController?.presentingViewController?
                 .dismiss(animated: true, completion: nil)
             
-        }
+    }
+    
     
 }
 
