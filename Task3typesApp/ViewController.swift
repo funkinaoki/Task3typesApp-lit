@@ -14,7 +14,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
+    
+//    @IBAction func deleteDataFromUserDefaults(_ sender: Any) {
+//
+//    //削除処理
+//    UserDefaults.standard.removeAll()
+//
+//    }
+//
+//
+//}
+//extension UserDefaults {
+//    func removeAll() {
+//        dictionaryRepresentation().forEach { removeObject(forKey: $0.key) }
+//    }
 }
-

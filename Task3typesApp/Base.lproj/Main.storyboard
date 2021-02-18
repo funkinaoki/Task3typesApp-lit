@@ -35,7 +35,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="cZ5-Bg-58Y" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="tD4-Ej-eLJ"/>
+                                    <segue destination="cZ5-Bg-58Y" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="RxW-nt-1wM"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="アートボード 3" translatesAutoresizingMaskIntoConstraints="NO" id="J1R-EI-QO6">
@@ -354,8 +354,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="itx-26-JUa"/>
-        <segue reference="GFL-2A-J9q"/>
+        <segue reference="gSK-5A-8Ed"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="112856" width="1276" height="1276"/>
