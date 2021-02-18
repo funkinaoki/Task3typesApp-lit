@@ -18,58 +18,47 @@ class ResultViewController: UIViewController, UITableViewDataSource {
     var genrenum: Int!
     
     var addContext: String!
+    
     //タスクの配列
     var pastTaskArray = [String]()
     var nowTaskArray = [String]()
     var nearfTaskArray = [String]()
     var futureTaskArray = [String]()
     
-    
+    var thisTask = [String]()
+
     //savedataにアクセス
     var saveData: UserDefaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        table.dataSource = self
         
+        table.dataSource = self
         pastTaskArray = ["会話したい" , "音楽を聴きたい", "サイコなことをしたい"]
         nowTaskArray = ["いいことしたい" , "貢献したい", "わー押したい"]
         nearfTaskArray = ["そーしたい" , "頭が痛い", "走行したい"]
         futureTaskArray = ["変形したい" , "電電したい", "変哲なことしたい"]
         
+//        let thisTaskArray:[[Any]] = [pastTaskArray,nowTaskArray,nearfTaskArray,futureTaskArray]
+        
         if genrenum == 1 {
-            genre.text = "＜過去＞タスク一覧"
-            saveData.set(pastTaskArray, forKey: "udpastfTaskArray")
-            pastTaskArray = saveData.array(forKey: "udpastTaskArray") as! [String]
-            
+            thisTask = pastTaskArray
         } else if genrenum == 2 {
-            genre.text = "＜今＞タスク一覧"
-            nowTaskArray = saveData.array(forKey: "udnowTaskArray") as! [String]
+            thisTask = nowTaskArray
         } else if genrenum == 3 {
-            genre.text = "＜近々＞タスク一覧"
-            saveData.set(nearfTaskArray, forKey: "udnearfTaskArray")
-            nearfTaskArray = saveData.array(forKey: "udnearfTaskArray") as! [String]
+            thisTask = nearfTaskArray
         } else if genrenum == 4 {
-            genre.text = "＜未来＞タスク一覧"
-            saveData.set(futureTaskArray, forKey: "udfutureTaskArray")
-            futureTaskArray = saveData.array(forKey: "udfutureTaskArray") as! [String]
+            thisTask = futureTaskArray
         }
+        
+        saveData.set(thisTask, forKey: "\(thisTask)")
+        thisTask = saveData.array(forKey: "\(thisTask)") as! [String]
+        print(thisTask)
         
         //save押して戻ってきた時
         if addContext != nil {
-            if genrenum == 1 {
-                pastTaskArray.append(addContext)
-                saveData.set(pastTaskArray,forKey: "udpastTaskArray")
-            } else if genrenum == 2 {
-                nowTaskArray.append(addContext)
-                saveData.set(nowTaskArray, forKey: "udnowTaskArray")
-            } else if genrenum == 3 {
-                nearfTaskArray.append(addContext)
-                saveData.set(nearfTaskArray, forKey: "udnearfTaskArray")
-            } else if genrenum == 4 {
-                futureTaskArray.append(addContext)
-                saveData.set(futureTaskArray, forKey: "udfutureTaskArray")
-            }
+            thisTask.append(addContext)
+            saveData.set(thisTask, forKey:  "\(thisTask)")
         }
         //テスト
         print(UserDefaults.standard.dictionaryRepresentation())
@@ -104,23 +93,14 @@ class ResultViewController: UIViewController, UITableViewDataSource {
     
     //セルの数を返す
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pastTaskArray.count
+        return thisTask.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-        
-        if genrenum == 1 {
-            cell?.textLabel?.text = pastTaskArray[indexPath.row]
-        } else if genrenum == 2 {
-            cell?.textLabel?.text = nowTaskArray[indexPath.row]
-        } else if genrenum == 3 {
-            cell?.textLabel?.text = nearfTaskArray[indexPath.row]
-        } else if genrenum == 4 {
-            cell?.textLabel?.text = futureTaskArray[indexPath.row]
-        }
+        cell?.textLabel?.text = thisTask[indexPath.row]
         return cell!
     }
     
