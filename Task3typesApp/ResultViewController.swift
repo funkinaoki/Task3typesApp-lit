@@ -51,11 +51,12 @@ class ResultViewController: UIViewController, UITableViewDataSource {
             thisTask = futureTaskArray
         }
         
-        saveData.set(thisTask, forKey: "\(thisTask)")
+        //saveDataに中身があった場合のみ、thisTaskの値はsaveDataからとります。
         thisTask = saveData.array(forKey: "\(thisTask)") as! [String]
         print(thisTask)
         
-        //save押して戻ってきた時
+        
+        // １、save押して戻ってきた時、thisTaskに追加します。そしてそれをsaveDataします。thisTaskは画面遷移すると元に戻ってしまいます。そのため、次からはthisTaskの中身をsaveDataからとるよ。
         if addContext != nil {
             thisTask.append(addContext)
             saveData.set(thisTask, forKey:  "\(thisTask)")
